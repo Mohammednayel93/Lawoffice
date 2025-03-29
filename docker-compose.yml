@@ -9,7 +9,7 @@ services:
       - db
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=db;Database=law_office;User=sa;Password=password123;
+      - ConnectionStrings__LawOffice_Database=Server=db;Database=law_office;User=sa;Password=password123;
 
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
