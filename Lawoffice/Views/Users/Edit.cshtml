@@ -1,0 +1,85 @@
+﻿@model Lawoffice.DTOs.UserRequest
+
+@{
+    ViewData["Title"] = "تعديل بيانات العميل";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">تعديل بيانات العميل</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="row g-0">
+                <form method="post" enctype="multipart/form-data" style="display: contents;">
+                    @Html.HiddenFor(model => model.id)
+
+                    <div class="col-12 col-md-12 d-flex flex-column">
+                        <div class="card-body">
+                            <h2 class="mb-4">معلومات العميل</h2>
+
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                            <div class="row g-2 mb-3">
+                                <div class="col-md">
+                                    <div class="form-label">الاسم</div>
+                                    @Html.TextBoxFor(model => model.name, new { @class = "form-control", placeholder = "ادخل الاسم الكامل" })
+                                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row g-2 mb-3">
+                                <div class="col-md">
+                                    <div class="form-label">رقم التليفون  </div>
+                                    @Html.TextBoxFor(model => model.phone_number_1, new { @class = "form-control", placeholder = "ادخل رقم التليفون  " })
+                                    @Html.ValidationMessageFor(model => model.phone_number_1, "", new { @class = "text-danger" })
+                                </div>
+                            </div> 
+                            <div class="row g-2 mb-3">
+                                <div class="col-md">
+                                    <div class="form-label">البريد الإلكتروني</div>
+                                    @Html.TextBoxFor(model => model.email, new { @class = "form-control", placeholder = "example@example.com", type = "email" })
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row g-2 mb-3">
+                                <div class="col-md">
+                                    <div class="form-label">رقم الهوية</div>
+                                    @Html.TextBoxFor(model => model.identity_number, new { @class = "form-control", placeholder = "ادخل رقم الهوية" })
+                                    @Html.ValidationMessageFor(model => model.identity_number, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                           @*  <div class="row g-2 mb-3">
+                                <div class="col-md">
+                                    <div class="form-label">ملاحظات</div>
+                                    @Html.TextAreaFor(model => model.message, 5, 50, new { @class = "form-control", placeholder = "اكتب أي ملاحظات إضافية" })
+                                    @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
+                                </div>
+                            </div> *@
+                        </div>
+
+                        <div class="card-footer bg-transparent mt-auto">
+                            <div class="btn-list justify-content-end">
+                                <a href="@Url.Action("Index", "Users")" class="btn btn-secondary">الغاء</a>
+                                <button type="submit" class="btn btn-primary">تحديث</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

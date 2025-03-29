@@ -1,0 +1,202 @@
+﻿<!doctype html>
+
+
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>@ViewData["Title"] - Mohamed Hashem</title>    <!-- CSS files -->
+    <link href="/css/admin_theme/dist/css/tabler.rtl.min.css?1692870487" rel="stylesheet" />
+    <link href="/css/admin_theme/dist/css/tabler.rtl.min.css?1692870487" rel="stylesheet" />
+    <link href="/css/admin_theme/dist/css/tabler-flags.rtl.min.css?1692870487" rel="stylesheet" />
+    <link href="/css/admin_theme/dist/css/tabler-payments.rtl.min.css?1692870487" rel="stylesheet" />
+    <link href="/css/admin_theme/dist/css/tabler-vendors.rtl.min.css?1692870487" rel="stylesheet" />
+    <link href="/css/admin_theme/dist/css/demo.rtl.min.css?1692870487" rel="stylesheet" />
+    <link href="/css/PagedList.css" rel="stylesheet" />
+    <link href="/css/loader.css" rel="stylesheet" />
+    <link href="/css/toastr.css" rel="stylesheet" />
+    <link href="/css/select2/select2.min.css" rel="stylesheet" />
+
+    <style>
+        @@import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+        .select2{
+            width: -webkit-fill-available !important;
+        }
+        .d-none{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <script src="/css/admin_theme/dist/js/demo-theme.min.js?1692870487"></script>
+    <div class="page">
+        <!-- Navbar -->
+        <header class="navbar navbar-expand-md d-print-none">
+            <div class="container-xl">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                    <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                        <a href="/">
+                          مكتب محمد هاشم
+                        </a>
+                    </h1>
+                </h1>
+                <div class="navbar-nav flex-row order-md-last">
+                    <div class="d-none d-md-flex">
+                        <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip"
+                           data-bs-placement="bottom">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
+                        </a>
+                        <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode" data-bs-toggle="tooltip"
+                           data-bs-placement="bottom">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>
+                        </a>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                            <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                            <div class="d-none d-xl-block ps-2">
+                                <div>ادمن المكتب</div>
+                                <div class="mt-1 small text-secondary">مسئول</div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            @*  <a href="#" class="dropdown-item">Status</a>
+                            <a href="./profile.html" class="dropdown-item">Profile</a>
+                            <a href="#" class="dropdown-item">Feedback</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="./settings.html" class="dropdown-item">Settings</a> *@
+                            <a href="/Account/Logout" class="dropdown-item">تسجيل الخروج</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/cases/index">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        القضايا
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users/index">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        العملاء
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/casetypes/index">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        انواع القضايا
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/filetypes/index">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        انواع الملفات
+                                    </span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="page-wrapper">
+            @RenderBody()
+            <footer class="footer footer-transparent d-print-none">
+                <div class="container-xl">
+                    <div class="row text-center align-items-center flex-row-reverse">
+                        <div class="col-lg-auto ms-lg-auto">
+                            <ul class="list-inline list-inline-dots mb-0">
+                                <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank" class="link-secondary" rel="noopener">Documentation</a></li>
+                                <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
+                                <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
+                                <li class="list-inline-item">
+                                    <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                                        Sponsor
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                            <ul class="list-inline list-inline-dots mb-0">
+                                <li class="list-inline-item">
+                                    Copyright &copy; 2023
+                                    <a href="." class="link-secondary">Tabler</a>.
+                                    All rights reserved.
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="./changelog.html" class="link-secondary" rel="noopener">
+                                        v1.0.0-beta20
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div id="loader" class="justify-content-center loading-backdrop d-none">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/css/toastr/toastr.min.js" defer></script>
+    <!-- Libs JS -->
+    <script src="/css/admin_theme/dist/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+    <script src="/css/admin_theme/dist/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487" defer></script>
+    <script src="/css/admin_theme/dist/libs/jsvectormap/dist/maps/world.js?1692870487" defer></script>
+    <script src="/css/admin_theme/dist/libs/jsvectormap/dist/maps/world-merc.js?1692870487" defer></script>
+    <!-- Tabler Core -->
+    <script src="/css/admin_theme/dist/js/tabler.min.js?1692870487" defer></script>
+    <script src="/css/admin_theme/dist/js/demo.min.js?1692870487" defer></script>
+    <script src="/css/select2/select2.full.min.js" defer></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+
+
+

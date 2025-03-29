@@ -1,0 +1,59 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model List<Lawoffice.Models.LawOfficeModels.FileType>
+
+@{
+    ViewData["Title"] = "أنواع الملفات";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">أنواع الملفات</h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+                    <a href="/FileTypes/Create" class="btn btn-primary d-none d-sm-inline-block">اضافة نوع جديد</a>
+                    <a href="/FileTypes/Create" class="btn btn-primary d-sm-none btn-icon">اضافة نوع جديد</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="row row-cards">
+            <div class="col-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-vcenter card-table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>الاسم</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.TypeName</td>
+                                        <td>
+                                            <a href="@Url.Action("Edit", "FileTypes", new { id = item.Id })" class="btn btn-primary btn-sm">تعديل</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

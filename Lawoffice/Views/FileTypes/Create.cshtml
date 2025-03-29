@@ -1,0 +1,40 @@
+﻿@model Lawoffice.DTOs.TypeRequest
+
+@{
+    ViewData["Title"] = "إضافة نوع ملف";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">"إضافة نوع ملف</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="row g-0">
+                <form method="post">
+                    <div class="card-body">
+                        <h3 class="card-title">إضافة نوع ملف</h3>
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                        <div class="mb-3">
+                            <label class="form-label">اسم النوع</label>
+                            @Html.TextBoxFor(m => m.name, new { @class = "form-control", placeholder = "أدخل اسم النوع" })
+                            @Html.ValidationMessageFor(m => m.name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="card-footer text-end">
+                        <a href="@Url.Action("Index")" class="btn btn-secondary">إلغاء</a>
+                        <button type="submit" class="btn btn-primary">حفظ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿@model Lawoffice.Models.CaseRequest
+@{
+    ViewData["Title"] = "إضافة قضية";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">إضافة قضية</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-12 col-md-3 border-end">
+                    <div class="card-body">
+                        <h4 class="subheader">إعدادات القضية</h4>
+                        <div class="list-group list-group-transparent">
+                            <a class="list-group-item list-group-item-action active">تفاصيل القضية</a>
+                            <a class="list-group-item list-group-item-action disabled">الملفات</a>
+                        </div>
+                    </div>
+                </div>
+
+                <form method="post" class="col-12 col-md-9 d-flex flex-column">
+                    @Html.AntiForgeryToken()
+                    <div class="card-body">
+                        <h3 class="mb-4">تفاصيل القضية</h3>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">العميل</label>
+                                @Html.DropDownListFor(m => m.client_id, (SelectList)ViewBag.Clients, "اختر عميل", new { @class = "form-select select2-single" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الخصم</label>
+                                @Html.DropDownListFor(m => m.opponent_id, (SelectList)ViewBag.Opponents, "اختر خصم", new { @class = "form-select select2-single" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">نوع القضية</label>
+                                @Html.DropDownListFor(m => m.case_type_id, (SelectList)ViewBag.CaseTypes, "اختر النوع", new { @class = "form-select" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم الدعوى</label>
+                                @Html.TextBoxFor(m => m.lawsuit_number, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">اسم المحكمة</label>
+                                @Html.TextBoxFor(m => m.court_name, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">تاريخ رفع الدعوى</label>
+                                @Html.TextBoxFor(m => m.filing_lawsuit_date, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">رقم التوكيل</label>
+                                @Html.TextBoxFor(m => m.power_of_attorney_number, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الرسوم</label>
+                                @Html.TextBoxFor(m => m.fees, new { @class = "form-control", type = "number", step = "0.01" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">المدفوع من الرسوم</label>
+                                @Html.TextBoxFor(m => m.fees_payment, new { @class = "form-control", type = "number", step = "0.01" })
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">ملاحظات</label>
+                                @Html.TextAreaFor(m => m.message, new { @class = "form-control", rows = 3 })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer bg-transparent text-end">
+                        <a href="@Url.Action("Index")" class="btn btn-secondary">إلغاء</a>
+                        <button type="submit" class="btn btn-primary">حفظ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

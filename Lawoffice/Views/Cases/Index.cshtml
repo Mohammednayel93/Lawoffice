@@ -1,0 +1,215 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Lawoffice.Models.LawOfficeModels.Case>
+
+@{
+    ViewData["Title"] = "القضايا";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">القضايا</h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+                    <a href="@Url.Action("Create", "Cases")" class="btn btn-primary d-none d-sm-inline-block">اضافة قضية جديدة</a>
+                    <a href="@Url.Action("Create", "Cases")" class="btn btn-primary d-sm-none btn-icon">اضافة قضية</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <form method="get" class="row g-3 mb-3">
+            <div class="col-md-3">
+                <label class="form-label">رقم الدعوي</label>
+                <input type="text" name="caseNumber" value="@ViewBag.CaseNumber" class="form-control" placeholder="رقم الدعوي" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">العميل</label>
+                @Html.DropDownList("clientId", (SelectList)ViewBag.Clients, "الكل", new { @class = "form-select select2-single" })
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">الخصم</label>
+                @Html.DropDownList("opponentId", (SelectList)ViewBag.Opponents, "الكل", new { @class = "form-select select2-single" })
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">اسم المحكمة</label>
+                <input type="text" name="courtName" value="@ViewBag.CourtName" class="form-control" placeholder="ادخل اسم المحكمة" />
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">بحث</button>
+            </div>
+        </form>
+
+        <div class="row row-cards">
+            <div class="col-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-vcenter card-table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>رقم الدعوى</th>
+                                    <th>نوع القضية</th>
+                                    <th>العميل</th>
+                                    <th>الخصم</th>
+                                    <th>المحكمة</th>
+                                    <th>التاريخ</th>
+                                    <th>الأوامر</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.LawsuitNumber</td>
+                                        <td>@item.CaseType?.TypeName</td>
+                                        <td>@item.Client?.Name</td>
+                                        <td>@item.Opponent?.Name</td>
+                                        <td>@item.CourtName</td>
+                                        <td>@item.FilingLawsuitDate?.ToString("yyyy-MM-dd")</td>
+                                        <td>
+                                            <a href="@Url.Action("Edit", "Cases", new { id = item.Id })" class="btn btn-sm btn-primary">تعديل</a>
+                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#proceduresModal" data-case-id="@item.Id">الإجراءات</button>
+                                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#sessionsModal" data-case-id="@item.Id">الجلسات</button>
+                                            <a href="@Url.Action("Files", "Cases", new { id = item.Id })" class="btn btn-sm btn-primary"> المستندات</a>
+
+                                            <a href="@Url.Action("Create", "Procedures", new { caseId = item.Id })" class="btn btn-sm btn-primary">اضافة اجراء</a>
+                                            <a href="@Url.Action("Create", "Sessions", new { caseId = item.Id })" class="btn btn-sm btn-primary">اضافة جلسة</a>
+
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-center">
+                        @if (Model.Count > 0)
+                        {
+                            <div class="pagination-area text-center">
+                                <div class="pagination-box">
+                                    @Html.PagedListPager(Model, page => Url.Action("Index", new
+                                        {
+                                            page,
+                                            caseNumber = ViewBag.CaseNumber,
+                                            courtName = ViewBag.CourtName,
+                                            clientId = ViewBag.ClientId,
+                                            opponentId = ViewBag.OpponentId
+                                        }),
+                                             new PagedListRenderOptions
+                                {
+                                    UlElementattributes = new Dictionary<string, string> { { "style", "justify-content: center;" } },
+                                    LiElementClasses = new[] { "page-item" },
+                                    DelimiterBetweenPageNumbers = ""
+                                })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .select2-container .select2-selection--single {
+        height: 38px !important; /* Match Bootstrap .form-select */
+        padding: 6px 12px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 24px; /* Adjust for text alignment */
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 38px !important;
+    }
+</style>
+<!-- Modal: Procedures -->
+<div class="modal fade" id="proceduresModal" tabindex="-1" aria-labelledby="proceduresModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">الإجراءات</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="proceduresContent">
+                <div class="text-center">جاري التحميل...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Sessions -->
+<div class="modal fade" id="sessionsModal" tabindex="-1" aria-labelledby="sessionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">الجلسات</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="sessionsContent">
+                <div class="text-center">جاري التحميل...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+   
+    <script>
+        $(document).ready(function () {
+            $('.select2-single').select2({
+                placeholder: "اختر",
+                allowClear: true,
+                width: '100',
+                dir: "rtl",
+                language: {
+                    noResults: function () {
+                        return "لا توجد نتائج";
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        $('#proceduresModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget);
+            const caseId = button.data('case-id');
+            $('#proceduresContent').load(`/Cases/GetProceduresPartial/${caseId}`);
+        });
+
+        $('#sessionsModal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget);
+            const caseId = button.data('case-id');
+            $('#sessionsContent').load(`/Cases/GetSessionsPartial/${caseId}`);
+        });
+
+        // Optional: handle delete clicks dynamically
+        $(document).on('click', '.delete-item', function () {
+            const url = $(this).data('url');
+            if (confirm("هل أنت متأكد من الحذف؟")) {
+                fetch(url, { method: 'POST' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            $(this).closest('tr').remove();
+                            toastr.success("تم الحذف بنجاح");
+                        } else {
+                            toastr.error("حدث خطأ أثناء الحذف");
+                        }
+                    });
+            }
+        });
+    </script>
+
+}

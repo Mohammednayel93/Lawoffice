@@ -1,0 +1,39 @@
+﻿@model Lawoffice.DTOs.ProcedureRequest
+@{
+    ViewData["Title"] = "إضافة إجراء";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title"> إضافة إجراء</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="row g-0">
+                <form asp-action="Create" method="post">
+                    <div class="card-body">
+                    @Html.HiddenFor(m => m.case_id)
+                    <div class="mb-3">
+                        <label class="form-label">تاريخ الإجراء</label>
+                        @Html.TextBoxFor(m => m.procedure_date, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">الوصف</label>
+                        @Html.TextAreaFor(m => m.decription, new { @class = "form-control", rows = 4 })
+                    </div>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                    <a asp-action="Index" asp-route-caseId="@Model.case_id" class="btn btn-secondary">إلغاء</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

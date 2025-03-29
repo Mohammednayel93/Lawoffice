@@ -1,0 +1,44 @@
+﻿@model Lawoffice.DTOs.SessionRequest
+@{
+    ViewData["Title"] = "تعديل جلسة";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title"> إضافة جلسة</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="row g-0">
+                <form asp-action="Edit" method="post">
+                    <div class="card-body">
+                    @Html.HiddenFor(m => m.case_id)
+                    @Html.HiddenFor(m => m.id)
+                    <div class="mb-3">
+                        <label class="form-label">تاريخ الجلسة</label>
+                        @Html.TextBoxFor(m => m.session_date, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">الوصف</label>
+                        @Html.TextAreaFor(m => m.description, new { @class = "form-control", rows = 3 })
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">القرار</label>
+                        @Html.TextAreaFor(m => m.descision, new { @class = "form-control", rows = 2 })
+                    </div>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                    <a asp-action="Index" asp-route-caseId="@Model.case_id" class="btn btn-secondary">إلغاء</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

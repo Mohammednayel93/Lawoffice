@@ -1,0 +1,38 @@
+﻿@model Lawoffice.DTOs.TypeRequest
+@{
+    ViewData["Title"] = "تعديل نوع قضية";
+}
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">"تعديل نوع قضية</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="row g-0">
+                <form asp-action="Edit" method="post">
+                    @Html.HiddenFor(m => m.id)
+                    <div class="card-body">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                        <div class="mb-3">
+                            <label asp-for="name" class="form-label">اسم النوع</label>
+                            @Html.TextBoxFor(m => m.name, new { @class = "form-control", placeholder = "ادخل اسم النوع" })
+                            @Html.ValidationMessageFor(m => m.name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="card-footer text-end">
+                        <a asp-action="Index" class="btn btn-secondary">الغاء</a>
+                        <button type="submit" class="btn btn-primary">تحديث</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

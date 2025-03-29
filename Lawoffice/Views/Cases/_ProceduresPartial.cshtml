@@ -1,0 +1,23 @@
+﻿@model List<Lawoffice.Models.LawOfficeModels.Procedure>
+
+<table class="table table-bordered" style=" font-size: 13px;">
+    <thead>
+        <tr>
+            <th>التاريخ</th>
+            <th>الوصف</th>
+            <th>حذف</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProcedureDate?.ToString("yyyy-MM-dd")</td>
+                <td>@item.Description</td>
+                <td>
+                    <button class="btn btn-sm btn-danger delete-item" data-url="@Url.Action("DeleteProcedure", "Cases", new { id = item.Id })">حذف</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

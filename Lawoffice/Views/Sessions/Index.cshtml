@@ -1,0 +1,55 @@
+﻿@model List<Lawoffice.Models.LawOfficeModels.Session>
+@{
+    ViewData["Title"] = "الجلسات";
+    var caseId = ViewBag.CaseId;
+}
+ 
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                <h2 class="page-title">الجلسات</h2>
+                </div>
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <a href="@Url.Action("Create", "Sessions", new { caseId })" class="btn btn-primary">إضافة جلسة جديدة</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-vcenter card-table table-striped">
+                <thead>
+                    <tr>
+                        <th>التاريخ</th>
+                        <th>الوصف</th>
+                        <th>القرار</th>
+                        <th>الأوامر</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.SessionDate?.ToString("yyyy-MM-dd")</td>
+                            <td>@item.Description</td>
+                            <td>@item.Descision</td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Sessions", new { id = item.Id })" class="btn btn-sm btn-primary">تعديل</a>
+                                <form method="post" asp-action="Delete" asp-controller="Sessions" asp-route-id="@item.Id" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>

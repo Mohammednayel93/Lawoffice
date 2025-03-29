@@ -1,0 +1,9 @@
+﻿ 
+ Scaffold-DbContext "Server=DESKTOP-7JUMGO6;Database=law_office; Integrated Security=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir  LawOfficeModels -force
+  
+Docker Commands 
+ docker run -d -p 8080:80 rentakapp 'to run app'
+docker build -t rentakapp . 'to build app'
+docker compose up 'to run app'
+
+ 

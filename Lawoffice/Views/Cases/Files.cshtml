@@ -1,0 +1,78 @@
+﻿@model Lawoffice.Models.LawOfficeModels.Case
+@{
+    ViewData["Title"] = "الملفات";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">الملفات الخاصة بالقضية: @Model.LawsuitNumber</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="mb-4">رفع ملفات جديدة</h4>
+                <form method="post" enctype="multipart/form-data" asp-action="UploadFiles" asp-controller="Cases">
+                    <input type="hidden" name="caseId" value="@Model.Id" />
+
+                    <div class="mb-3">
+                        <label class="form-label">نوع الملف</label>
+                        @Html.DropDownList("fileTypeId", (SelectList)ViewBag.FileTypes, "اختر نوع الملف", new { @class = "form-select" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">اختر الملفات</label>
+                        <input type="file" name="files" multiple class="form-control" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">رفع الملفات</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4 class="mb-4">الملفات المرفوعة</h4>
+
+                @if (Model.Files?.Any() == true)
+                {
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                               
+                                <th>النوع</th>
+                                <th>التحميل</th>
+                                <th>حذف</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var file in Model.Files)
+                            {
+                                <tr>
+                                    
+                                    <td>@file.FileType?.TypeName</td>
+                                    <td><a href="@file.FileUrl" target="_blank" class="btn btn-sm btn-info">تحميل</a></td>
+                                    <td>
+                                        <form asp-action="DeleteFile" asp-route-id="@file.Id" method="post" onsubmit="return confirm('هل أنت متأكد من الحذف؟')">
+                                            <button type="submit" class="btn btn-sm btn-danger">حذف</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">لا توجد ملفات مرفوعة لهذه القضية.</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

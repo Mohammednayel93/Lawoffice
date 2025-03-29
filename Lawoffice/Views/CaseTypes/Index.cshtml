@@ -1,0 +1,56 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model List<Lawoffice.Models.LawOfficeModels.CaseType>
+
+@{
+    ViewData["Title"] = "أنواع القضايا";
+}
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">أنواع القضايا</h2>
+            </div>
+            <div class="col-auto ms-auto d-print-none">
+                <div class="btn-list">
+                    <a href="@Url.Action("Create", "CaseTypes")" class="btn btn-primary">
+                        اضافة نوع جديد
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-vcenter card-table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>اسم النوع</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.TypeName</td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "CaseTypes", new { id = item.Id })" class="btn btn-sm btn-primary">تعديل</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
